@@ -22,12 +22,14 @@ input,textarea{width:100%;border:1px solid #cfd6e4;border-radius:8px;padding:7px
 </style>
 </head>
 <body>
-<header><h1>CHECKLIST TURNAROUND AIR INDIA</h1><div class="sub">Đã cập nhật thứ tự mốc giờ theo file Excel mới. Planned Time = ETD - TIME(...). Nhập giờ: 0715 hoặc 07:15</div><div class="topActions"><button class="btn green" onclick="submitToGoogleSheets()">Gửi Google Sheets</button><button class="btn light" onclick="downloadExcel()">Excel</button><button class="btn dark" onclick="copyReport()">Copy</button></div></header>
+<header><h1>CHECKLIST AIR INDIA - VJGS HAN</h1><div class="sub">Nhập giờ: 0715 hoặc 07:15</div><div class="topActions"><button class="btn green" onclick="submitToGoogleSheets()">Gửi Google Sheets</button><button class="btn light" onclick="downloadExcel()">Excel</button><button class="btn dark" onclick="copyReport()">Copy</button></div></header>
 <main>
 <section class="panel"><div class="grid">
 <div><label>Flight No.</label><input id="flightNo" value="AI2390/AI2391"></div><div><label>Date</label><input id="flightDate" type="date"></div><div class="etdBox"><label>ETD</label><input class="time" id="etd" type="text" inputmode="numeric" maxlength="5" value="08:20" oninput="timeTyping(this)" onblur="this.value=normalizeTimeValue(this.value);render()"></div><div><label>Aircraft / Reg.</label><input id="aircraft"></div><div><label>Bay</label><input id="bay"></div><div><label>Prepared by</label><input id="preparedBy"></div>
 </div><div class="actions"><button class="btn red" onclick="saveNow()">Lưu trên máy</button><button class="btn light" onclick="stampFirstEmpty()">Now mục trống đầu</button><button class="btn light" onclick="clearActualTimes()">Xóa giờ</button><button class="btn light" onclick="resetAll()">Reset</button></div><div id="sheetStatus" class="status"></div></section>
 <section id="summary" class="summary"></section><section id="tasks"></section>
+    <section class="panel"><div id="sheetStatus" class="status"></div></section>
+  <footer class="copyright">© 2026 <b>Nguyen Hoang Minh</b> - VJGS.</footer>
 </main>
 <script>
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbytEw7OgR_fyqlA5F_MIiBOjjceknE01JJsLfLYjVFjKvMG_NCtrG-LpGDit5DS5Vgh3A/exec';
