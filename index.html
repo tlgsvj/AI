@@ -25,7 +25,7 @@ input,textarea{width:100%;border:1px solid #cfd6e4;border-radius:8px;padding:7px
 <header><h1>CHECKLIST AIR INDIA - VJGS HAN</h1><div class="sub">Nhập giờ: 0715 hoặc 07:15</div><div class="topActions"><button class="btn green" onclick="submitToGoogleSheets()">Gửi Google Sheets</button><button class="btn light" onclick="downloadExcel()">Excel</button><button class="btn dark" onclick="copyReport()">Copy</button></div></header>
 <main>
 <section class="panel"><div class="grid">
-<div><label>Flight No.</label><input id="flightNo" value="AI2390/AI2391"></div><div><label>Date</label><input id="flightDate" type="date"></div><div class="etdBox"><label>ETD</label><input class="time" id="etd" type="text" inputmode="numeric" maxlength="5" value="08:20" oninput="timeTyping(this)" onblur="this.value=normalizeTimeValue(this.value);render()"></div><div><label>Aircraft / Reg.</label><input id="aircraft"></div><div><label>Bay</label><input id="bay"></div><div><label>Prepared by</label><input id="preparedBy"></div>
+<div><label>Flight No.</label><input id="flightNo" value="AI2390/AI2391"></div><div><label>Date</label><input id="flightDate" type="date"></div><div class="etdBox"><label>ETD</label><input class="time" id="etd" type="text" inputmode="numeric" maxlength="5" value="08:00" oninput="timeTyping(this)" onblur="this.value=normalizeTimeValue(this.value);render()"></div><div><label>Aircraft / Reg.</label><input id="aircraft"></div><div><label>Bay</label><input id="bay"></div><div><label>Prepared by</label><input id="preparedBy"></div>
 </div><div class="actions"><button class="btn red" onclick="saveNow()">Lưu trên máy</button><button class="btn light" onclick="stampFirstEmpty()">Now mục trống đầu</button><button class="btn light" onclick="clearActualTimes()">Xóa giờ</button><button class="btn light" onclick="resetAll()">Reset</button></div><div id="sheetStatus" class="status"></div></section>
 <section id="summary" class="summary"></section><section id="tasks"></section>
     <section class="panel"><div id="sheetStatus" class="status"></div></section>
@@ -43,13 +43,13 @@ function normalizeTimeValue(v){if(!v)return '';v=String(v).trim();if(/^\d{1,2}:\
 function timeTyping(input){let d=onlyDigits(input.value).slice(0,4);input.value=d.length>=3?d.slice(0,2)+':'+d.slice(2):d}
 function timeToMin(t){t=normalizeTimeValue(t);if(!t)return null;const a=t.split(':').map(Number);return a[0]*60+a[1]}
 function minToTime(m){m=((m%1440)+1440)%1440;return pad(Math.floor(m/60))+':'+pad(m%60)}
-function planned(offsetBeforeETD){return minToTime(timeToMin(el('etd').value||'08:20')-offsetBeforeETD)}
+function planned(offsetBeforeETD){return minToTime(timeToMin(el('etd').value||'08:00')-offsetBeforeETD)}
 function diffMin(a,p){if(!a||!p)return null;let d=timeToMin(a)-timeToMin(p);if(d>720)d-=1440;if(d<-720)d+=1440;return d}
 function diffText(a,p){const d=diffMin(a,p);if(d===null)return '';const s=d<0?'-':'';const x=Math.abs(d);return s+pad(Math.floor(x/60))+':'+pad(x%60)}
 function delayYN(a,p){const d=diffMin(a,p);if(d===null)return '';return d>0?'Yes':'No'}
 function getData(){let d={};try{d=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}d.meta=d.meta||{};d.rows=d.rows||{};return d}
 function setData(d){localStorage.setItem(KEY,JSON.stringify(d))}
-function loadMeta(){const d=getData();el('flightNo').value=d.meta.flightNo||'AI2390/AI2391';el('flightDate').value=d.meta.flightDate||todayISO();el('etd').value=d.meta.etd||'08:20';el('aircraft').value=d.meta.aircraft||'';el('bay').value=d.meta.bay||'';el('preparedBy').value=d.meta.preparedBy||''}
+function loadMeta(){const d=getData();el('flightNo').value=d.meta.flightNo||'AI2390/AI2391';el('flightDate').value=d.meta.flightDate||todayISO();el('etd').value=d.meta.etd||'08:00';el('aircraft').value=d.meta.aircraft||'';el('bay').value=d.meta.bay||'';el('preparedBy').value=d.meta.preparedBy||''}
 function saveMeta(){const d=getData();d.meta={flightNo:el('flightNo').value,flightDate:el('flightDate').value,etd:normalizeTimeValue(el('etd').value)||el('etd').value,aircraft:el('aircraft').value,bay:el('bay').value,preparedBy:el('preparedBy').value};setData(d)}
 function saveRows(){const d=getData();CHECKLIST.forEach(i=>{d.rows[i.stt]=d.rows[i.stt]||{};let a=el('actual_'+i.stt),r=el('reason_'+i.stt);if(a)d.rows[i.stt].actual=normalizeTimeValue(a.value)||a.value;if(r)d.rows[i.stt].reason=r.value});setData(d);updateSummary()}
 function saveNow(){saveMeta();saveRows();el('sheetStatus').textContent='Đã lưu tạm trên thiết bị này.'}
