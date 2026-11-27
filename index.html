@@ -1,639 +1,806 @@
 <!doctype html>
 <html lang="vi">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Checklist Turnaround Air India</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="description" content="Checklist Turnaround Air India - VJGS HAN">
+<title>Checklist Turnaround Air India - VJGS HAN</title>
 <style>
 :root{--red:#c8102e;--bg:#f5f6f8;--line:#dde2ea;--txt:#111827;--muted:#667085;--green:#067647;--blue:#1d4ed8}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--txt)}
-header{background:#fff;border-bottom:1px solid var(--line);padding:8px;position:sticky;top:0;z-index:9}h1{font-size:16px;margin:0;color:var(--red);line-height:1.15}.sub{font-size:10px;color:var(--muted);margin-top:2px}
-main{padding:8px;max-width:760px;margin:auto}.panel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px;margin-bottom:8px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}label{display:block;font-size:10px;font-weight:700;color:#344054;margin-bottom:2px}
-input,textarea{width:100%;border:1px solid #cfd6e4;border-radius:8px;padding:7px;font-size:16px;background:#fff}textarea{height:32px;min-height:32px;resize:vertical;font-size:13px}
-.time{text-align:center;font-weight:800;letter-spacing:.5px}.etdBox label{color:#c8102e;font-size:12px}.etdBox input{border:2px solid #c8102e;background:#fff7f7}
-.actions{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}.btn{border:0;border-radius:8px;padding:8px 9px;font-size:12px;font-weight:800;cursor:pointer}.red{background:var(--red);color:#fff}.dark{background:#344054;color:#fff}.green{background:var(--green);color:#fff}.light{background:#f2f4f7;border:1px solid #cfd6e4;color:#111827}
-.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:8px}.card{background:#fff;border:1px solid var(--line);border-radius:8px;text-align:center;padding:6px 3px}.card .t{font-size:9px;color:var(--muted)}.card .n{font-size:16px;font-weight:900}
-.task{background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:7px;padding:8px}.task.done{background:#f0fdf4}.task.delay{background:#fff7ed}
-.row1{display:grid;grid-template-columns:30px 1fr auto;gap:6px;align-items:start}.stt{font-size:12px;font-weight:900;color:#fff;background:#344054;border-radius:999px;text-align:center;padding:3px 0}.name{font-size:13px;font-weight:900;line-height:1.2}.pic{font-size:10px;color:var(--muted);margin-top:2px}.badge{font-size:10px;font-weight:900;border-radius:999px;padding:3px 6px;background:#eef2ff;color:#1d4ed8;white-space:nowrap}
-.row2{display:grid;grid-template-columns:70px 82px 80px 1fr;gap:5px;align-items:end;margin-top:7px}.delayText{text-align:center;font-size:12px;font-weight:900;padding:7px 2px;border-radius:8px;background:#f8fafc;border:1px solid var(--line);min-height:34px}.yes,.late{color:#b42318}.no,.early{color:#067647}
-.row2Range{
- display:grid;
- grid-template-columns:75px 75px 95px 1fr;
- gap:5px;
- align-items:end;
- margin-top:7px;
-}
-
-.rangeDelay{
- text-align:center;
- font-size:11px;
- font-weight:900;
- padding:5px;
- border-radius:8px;
- background:#f8fafc;
- border:1px solid #dde2ea;
- min-height:60px;
-}
-.status{font-size:12px;color:var(--blue);font-weight:700;margin-top:6px}.topActions{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+html{color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--txt)}
+header{background:#fff;border-bottom:1px solid var(--line);padding:8px;position:sticky;top:0;z-index:9}
+h1{font-size:16px;margin:0;color:var(--red);line-height:1.15}
+.sub{font-size:10px;color:var(--muted);margin-top:2px}
+main{padding:8px;max-width:760px;margin:auto}
+.panel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px;margin-bottom:8px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+label{display:block;font-size:10px;font-weight:700;color:#344054;margin-bottom:2px}
+input,textarea{width:100%;border:1px solid #cfd6e4;border-radius:8px;padding:7px;font-size:16px;background:#fff;color:var(--txt);font-family:inherit}
+textarea{height:100%;min-height:44px;resize:vertical;font-size:13px;line-height:1.25}
+.time{text-align:center;font-weight:800;letter-spacing:.5px}
+.etdBox label{color:#c8102e;font-size:12px}
+.etdBox input{border:2px solid #c8102e;background:#fff7f7}
+.actions{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+.btn{border:0;border-radius:8px;padding:8px 9px;font-size:12px;font-weight:800;cursor:pointer;font-family:inherit}
+.btn:disabled{opacity:.6;cursor:progress}
+.red{background:var(--red);color:#fff}
+.dark{background:#344054;color:#fff}
+.green{background:var(--green);color:#fff}
+.light{background:#f2f4f7;border:1px solid #cfd6e4;color:#111827}
+.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:8px}
+.card{background:#fff;border:1px solid var(--line);border-radius:8px;text-align:center;padding:6px 3px}
+.card .t{font-size:9px;color:var(--muted)}
+.card .n{font-size:16px;font-weight:900}
+.task{background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:7px;padding:8px}
+.task.done{background:#f0fdf4}
+.task.delay{background:#fff7ed}
+.row1{display:grid;grid-template-columns:30px 1fr auto;gap:6px;align-items:start}
+.stt{font-size:12px;font-weight:900;color:#fff;background:#344054;border-radius:999px;text-align:center;padding:3px 0}
+.name{font-size:13px;font-weight:900;line-height:1.2}
+.pic{font-size:10px;color:var(--muted);margin-top:2px}
+.badge{font-size:10px;font-weight:900;border-radius:999px;padding:3px 6px;background:#eef2ff;color:#1d4ed8;white-space:nowrap}
+.row2{display:grid;grid-template-columns:70px 82px 80px 1fr;gap:5px;align-items:stretch;margin-top:7px}
+.row2>div,.row2Range>div{display:grid;grid-template-rows:auto 1fr;gap:2px;min-width:0}
+.delayText{text-align:center;font-size:12px;font-weight:900;padding:7px 2px;border-radius:8px;background:#f8fafc;border:1px solid var(--line);min-height:34px;display:flex;align-items:center;justify-content:center}
+.yes,.late{color:#b42318}
+.no,.early{color:#067647}
+.row2Range{display:grid;grid-template-columns:75px 75px 95px 1fr;gap:5px;align-items:stretch;margin-top:7px}
+.rangeDelay{text-align:center;font-size:11px;font-weight:900;padding:5px;border-radius:8px;background:#f8fafc;border:1px solid #dde2ea;min-height:60px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.status{font-size:12px;color:var(--blue);font-weight:700;margin-top:6px;min-height:16px}
+.topActions{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+footer.copyright{text-align:center;font-size:10px;color:var(--muted);padding:12px 0 20px}
 @media(min-width:850px){main{max-width:1280px}.grid{grid-template-columns:repeat(6,1fr)}#tasks{display:grid;grid-template-columns:1fr 1fr;gap:8px}.task{margin-bottom:0}}
 @media(max-width:390px){.row2{grid-template-columns:60px 75px 72px 1fr;gap:4px}input,textarea{font-size:15px;padding:6px}.btn{font-size:11px;padding:7px 7px}}
 </style>
 </head>
 <body>
-<header><h1>CHECKLIST AIR INDIA - VJGS HAN</h1><div class="sub">Nhập giờ: 0715 hoặc 07:15</div><div class="topActions"><button class="btn green" onclick="submitToGoogleSheets()">Gửi Google Sheets</button><button class="btn light" onclick="downloadExcel()">Excel</button><button class="btn dark" onclick="copyReport()">Copy</button></div></header>
+<header>
+  <h1>CHECKLIST AIR INDIA - VJGS HAN</h1>
+  <div class="sub">Nhập giờ: 0715 hoặc 07:15</div>
+  <div class="topActions">
+    <button class="btn green" id="btnSend" type="button">Gửi Google Sheets</button>
+    <button class="btn light" id="btnExcel" type="button">Excel</button>
+    <button class="btn dark" id="btnCopy" type="button">Copy</button>
+  </div>
+</header>
 <main>
-<section class="panel"><div class="grid">
-<div><label>Flight No.</label><input id="flightNo" value="AI2390/AI2391"></div><div><label>Date</label><input id="flightDate" type="date"></div><div class="etdBox"><label>ETD</label><input class="time" id="etd" type="text" inputmode="numeric" maxlength="5" value="07:45" oninput="timeTyping(this)" onblur="this.value=normalizeTimeValue(this.value);render()"></div><div><label>Aircraft / Reg.</label><input id="aircraft"></div><div><label>Bay</label><input id="bay"></div><div><label>Prepared by</label><input id="preparedBy"></div>
-</div><div class="actions"><button class="btn red" onclick="saveNow()">Lưu trên máy</button><button class="btn light" onclick="stampFirstEmpty()">Now mục trống đầu</button><button class="btn light" onclick="clearActualTimes()">Xóa giờ</button><button class="btn light" onclick="resetAll()">Reset</button></div><div id="sheetStatus" class="status"></div></section>
-<section id="summary" class="summary"></section><section id="tasks"></section>
-    <section class="panel"><div id="sheetStatus" class="status"></div></section>
+  <section class="panel">
+    <div class="grid">
+      <div><label for="flightNo">Flight No.</label><input id="flightNo" value="AI2390/AI2391" autocomplete="off"></div>
+      <div><label for="flightDate">Date</label><input id="flightDate" type="date"></div>
+      <div class="etdBox"><label for="etd">ETD</label><input class="time" id="etd" type="text" inputmode="numeric" maxlength="5" value="07:45" autocomplete="off"></div>
+      <div><label for="aircraft">Aircraft / Reg.</label><input id="aircraft" autocomplete="off"></div>
+      <div><label for="bay">Bay</label><input id="bay" autocomplete="off"></div>
+      <div><label for="preparedBy">Prepared by</label><input id="preparedBy" autocomplete="off"></div>
+    </div>
+    <div class="actions">
+      <button class="btn red" id="btnSave" type="button">Lưu trên máy</button>
+      <button class="btn light" id="btnStampNext" type="button">Now mục trống đầu</button>
+      <button class="btn light" id="btnClearTimes" type="button">Xóa giờ</button>
+      <button class="btn light" id="btnReset" type="button">Reset</button>
+    </div>
+    <div id="sheetStatus" class="status" role="status" aria-live="polite"></div>
+  </section>
+  <section id="summary" class="summary"></section>
+  <section id="tasks"></section>
   <footer class="copyright">© 2026 <b>Nguyen Hoang Minh</b> - VJGS.</footer>
 </main>
+<noscript><p style="padding:12px;color:#b42318;font-weight:700">Trang này cần JavaScript. Hãy bật JavaScript rồi tải lại.</p></noscript>
 <script>
+'use strict';
+/* ================= CẤU HÌNH ================= */
+/* URL Web App Google Apps Script (phải kết thúc bằng /exec) */
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbytEw7OgR_fyqlA5F_MIiBOjjceknE01JJsLfLYjVFjKvMG_NCtrG-LpGDit5DS5Vgh3A/exec';
-const CHECKLIST = [{"stt": 1, "offsetBeforeETD": 60, "task": "Chocks on", "pic": "Ramp"}, {"stt": 2, "offsetBeforeETD": 60, "task": "Fuel Bowser reported", "pic": "Fuel"}, {"stt": 3, "offsetBeforeETD": 58, "task": "Bag/Cargo offload start", "pic": "Baggage/Ramp"}, {"stt": 4, "offsetBeforeETD": 57, "task": "Doors Open", "pic": "Cabin/Ramp"}, {"stt": 5, "offsetBeforeETD": 57, "task": "Passengers Deplaning started", "pic": "Ramp/Gate"}, {"stt": 6, "offsetBeforeETD": 56, "task": "Catering Start", "pic": "Catering"}, {"stt": 7, "offsetBeforeETD": 55, "task": "Cabin crew reported at aircraft", "pic": "Cabin crew"}, {"stt": 8, "offsetBeforeETD": 50, "task": "Fueling Start", "pic": "Fuel"}, {"stt": 9, "offsetBeforeETD": 46, "task": "Passengers Deplaning end", "pic": "Ramp/Gate"}, {"stt": 10, "offsetBeforeETD": 45, "task": "Cleaning Start", "pic": "Cleaning"}, {"stt": 11, "offsetBeforeETD": 45, "task": "Security Check Start", "pic": "Security"}, {"stt": 12, "offsetBeforeETD": 40, "task": "Bag/Cargo offload end", "pic": "Baggage/Ramp"}, {"stt": 13, "offsetBeforeETD": 40, "task": "Bag/Cargo loading start", "pic": "Baggage/Ramp"}, {"stt": 14, "offsetBeforeETD": 40, "task": "Engineering Clearance End", "pic": "Engineering"}, {"stt": 15, "offsetBeforeETD": 38, "task": "Catering End", "pic": "Catering"}, {"stt": 16, "offsetBeforeETD": 36, "task": "Catering Handover", "pic": "Catering/Ramp"}, {"stt": 17, "offsetBeforeETD": 36, "task": "Security Check End", "pic": "Security/Ramp"}, {"stt": 18, "offsetBeforeETD": 35, "task": "Cleaning End", "pic": "Cleaning"}, {"stt": 19, "offsetBeforeETD": 35, "task": "Boarding clearance", "pic": "Ramp/Gate"}, {"stt": 20, "offsetBeforeETD": 35, "task": "Passengers boarding start", "pic": "Gate/Ramp"}, {"stt": 21, "offsetBeforeETD": 30, "task": "Pilots Onboard", "pic": "Flight crew"}, {"stt": 22, "offsetBeforeETD": 20, "task": "Fuelling End", "pic": "Fuel"}, {"stt": 23, "offsetBeforeETD": 20, "task": "Gate No Show notification to aircraft", "pic": "Gate/Ramp"}, {"stt": 24, "offsetBeforeETD": 19, "task": "GNS bag offload start", "pic": "Baggage/Ramp"}, {"stt": 25, "offsetBeforeETD": 18, "task": "Bag/Cargo loading end", "pic": "Baggage/Ramp"}, {"stt": 26, "offsetBeforeETD": 12, "task": "Passengers boarding end", "pic": "Gate/Ramp"}, {"stt": 27, "offsetBeforeETD": 12, "task": "GNS bag offload end", "pic": "Baggage/Ramp"}, {"stt": 28, "offsetBeforeETD": 12, "task": "Hold closed", "pic": "Ramp/Baggage"}, {"stt": 29, "offsetBeforeETD": 11, "task": "Engineering paperwork completed", "pic": "Engineering"}, {"stt": 30, "offsetBeforeETD": 11, "task": "All paperwork completed", "pic": "Ramp/LC"}, {"stt": 31, "offsetBeforeETD": 11, "task": "Ground staff Offboard", "pic": "Ramp/GSSĐ"}, {"stt": 32, "offsetBeforeETD": 10, "task": "Doors Closed", "pic": "Cabin/Ramp"}, {"stt": 33, "offsetBeforeETD": 7, "task": "Tow/Tractor connected", "pic": "Pushback/HS"}, {"stt": 34, "offsetBeforeETD": 7, "task": "Engineers ready to pushback", "pic": "Engineering/HS"}, {"stt": 35, "offsetBeforeETD": 0, "task": "AOBT", "pic": "Ramp"}];
-const KEY='turnaroundChecklistAI_order_from_excel_v3';
-function el(id){return document.getElementById(id)}
-function pad(n){return String(n).padStart(2,'0')}
-function todayISO(){const d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
-function onlyDigits(s){return String(s||'').replace(/\D/g,'')}
-function normalizeTimeValue(v){if(!v)return '';v=String(v).trim();if(/^\d{1,2}:\d{2}$/.test(v)){let p=v.split(':');let h=+p[0],m=+p[1];if(h>=0&&h<=23&&m>=0&&m<=59)return pad(h)+':'+pad(m)}let d=onlyDigits(v);if(d.length===3)d='0'+d;if(d.length>=4){d=d.slice(0,4);let h=+d.slice(0,2),m=+d.slice(2,4);if(h>=0&&h<=23&&m>=0&&m<=59)return pad(h)+':'+pad(m)}return ''}
-function timeTyping(input){let d=onlyDigits(input.value).slice(0,4);input.value=d.length>=3?d.slice(0,2)+':'+d.slice(2):d}
-function timeToMin(t){t=normalizeTimeValue(t);if(!t)return null;const a=t.split(':').map(Number);return a[0]*60+a[1]}
-function minToTime(m){m=((m%1440)+1440)%1440;return pad(Math.floor(m/60))+':'+pad(m%60)}
+
+/* Danh sách hạng mục: offsetBeforeETD = số phút trước ETD.
+   (Có thể dùng "type":"range" kèm "start"/"end" cho hạng mục có giờ bắt đầu/kết thúc) */
+const CHECKLIST = [{"stt":1,"offsetBeforeETD":60,"task":"Chocks on","pic":"Ramp"},{"stt":2,"offsetBeforeETD":60,"task":"Fuel Bowser reported","pic":"Fuel"},{"stt":3,"offsetBeforeETD":58,"task":"Bag/Cargo offload start","pic":"Baggage/Ramp"},{"stt":4,"offsetBeforeETD":57,"task":"Doors Open","pic":"Cabin/Ramp"},{"stt":5,"offsetBeforeETD":57,"task":"Passengers Deplaning started","pic":"Ramp/Gate"},{"stt":6,"offsetBeforeETD":56,"task":"Catering Start","pic":"Catering"},{"stt":7,"offsetBeforeETD":55,"task":"Cabin crew reported at aircraft","pic":"Cabin crew"},{"stt":8,"offsetBeforeETD":50,"task":"Fueling Start","pic":"Fuel"},{"stt":9,"offsetBeforeETD":46,"task":"Passengers Deplaning end","pic":"Ramp/Gate"},{"stt":10,"offsetBeforeETD":45,"task":"Cleaning Start","pic":"Cleaning"},{"stt":11,"offsetBeforeETD":45,"task":"Security Check Start","pic":"Security"},{"stt":12,"offsetBeforeETD":40,"task":"Bag/Cargo offload end","pic":"Baggage/Ramp"},{"stt":13,"offsetBeforeETD":40,"task":"Bag/Cargo loading start","pic":"Baggage/Ramp"},{"stt":14,"offsetBeforeETD":40,"task":"Engineering Clearance End","pic":"Engineering"},{"stt":15,"offsetBeforeETD":38,"task":"Catering End","pic":"Catering"},{"stt":16,"offsetBeforeETD":36,"task":"Catering Handover","pic":"Catering/Ramp"},{"stt":17,"offsetBeforeETD":36,"task":"Security Check End","pic":"Security/Ramp"},{"stt":18,"offsetBeforeETD":35,"task":"Cleaning End","pic":"Cleaning"},{"stt":19,"offsetBeforeETD":35,"task":"Boarding clearance","pic":"Ramp/Gate"},{"stt":20,"offsetBeforeETD":35,"task":"Passengers boarding start","pic":"Gate/Ramp"},{"stt":21,"offsetBeforeETD":30,"task":"Pilots Onboard","pic":"Flight crew"},{"stt":22,"offsetBeforeETD":20,"task":"Fuelling End","pic":"Fuel"},{"stt":23,"offsetBeforeETD":20,"task":"Gate No Show notification to aircraft","pic":"Gate/Ramp"},{"stt":24,"offsetBeforeETD":19,"task":"GNS bag offload start","pic":"Baggage/Ramp"},{"stt":25,"offsetBeforeETD":18,"task":"Bag/Cargo loading end","pic":"Baggage/Ramp"},{"stt":26,"offsetBeforeETD":12,"task":"Passengers boarding end","pic":"Gate/Ramp"},{"stt":27,"offsetBeforeETD":12,"task":"GNS bag offload end","pic":"Baggage/Ramp"},{"stt":28,"offsetBeforeETD":12,"task":"Hold closed","pic":"Ramp/Baggage"},{"stt":29,"offsetBeforeETD":11,"task":"Engineering paperwork completed","pic":"Engineering"},{"stt":30,"offsetBeforeETD":11,"task":"All paperwork completed","pic":"Ramp/LC"},{"stt":31,"offsetBeforeETD":11,"task":"Ground staff Offboard","pic":"Ramp/GSSĐ"},{"stt":32,"offsetBeforeETD":10,"task":"Doors Closed","pic":"Cabin/Ramp"},{"stt":33,"offsetBeforeETD":7,"task":"Tow/Tractor connected","pic":"Pushback/HS"},{"stt":34,"offsetBeforeETD":7,"task":"Engineers ready to pushback","pic":"Engineering/HS"},{"stt":35,"offsetBeforeETD":0,"task":"AOBT","pic":"Ramp"}];
+
+/* Khóa lưu trên thiết bị */
+const KEY = 'turnaroundChecklistAI_order_from_excel_v3';
+
+/* ================= TIỆN ÍCH ================= */
+const el = (id) => document.getElementById(id);
+const pad = (n) => String(n).padStart(2, '0');
+
+function esc(v){
+  return String(v == null ? '' : v)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+function todayISO(){
+  const d = new Date();
+  return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+}
+
+function nowHM(){
+  const n = new Date();
+  return pad(n.getHours()) + ':' + pad(n.getMinutes());
+}
+
+function onlyDigits(s){ return String(s || '').replace(/\D/g, ''); }
+
+/* Nhận 0715, 7:15, 07:15 -> "07:15". Không hợp lệ -> "" */
+function normalizeTimeValue(v){
+  if (v === null || v === undefined) return '';
+  v = String(v).trim();
+  if (!v) return '';
+  if (/^\d{1,2}:\d{2}$/.test(v)){
+    const p = v.split(':');
+    const h = +p[0], m = +p[1];
+    if (h >= 0 && h <= 23 && m >= 0 && m <= 59) return pad(h) + ':' + pad(m);
+    return '';
+  }
+  let d = onlyDigits(v);
+  if (d.length === 3) d = '0' + d;
+  if (d.length >= 4){
+    d = d.slice(0, 4);
+    const h = +d.slice(0, 2), m = +d.slice(2, 4);
+    if (h >= 0 && h <= 23 && m >= 0 && m <= 59) return pad(h) + ':' + pad(m);
+  }
+  return '';
+}
+
+/* Gõ số: 0 7 4 5 -> 07:45 */
+function timeTyping(input){
+  const d = onlyDigits(input.value).slice(0, 4);
+  input.value = d.length >= 3 ? d.slice(0, 2) + ':' + d.slice(2) : d;
+}
+
+function timeToMin(t){
+  const v = normalizeTimeValue(t);
+  if (!v) return null;
+  const a = v.split(':').map(Number);
+  return a[0] * 60 + a[1];
+}
+
+function minToTime(m){
+  m = ((m % 1440) + 1440) % 1440;
+  return pad(Math.floor(m / 60)) + ':' + pad(m % 60);
+}
+
+/* ================= MÔ HÌNH HẠNG MỤC ================= */
+function isRange(t){ return t && t.type === 'range'; }
+
+function offsetOf(t){
+  const n = Number(t.offsetBeforeETD ?? t.offset ?? 0);
+  return Number.isFinite(n) ? n : 0;
+}
+
+function planStartOffset(t){
+  const n = Number(isRange(t) ? (t.start ?? offsetOf(t)) : offsetOf(t));
+  return Number.isFinite(n) ? n : 0;
+}
+
+function planEndOffset(t){
+  const n = Number(isRange(t) ? (t.end ?? offsetOf(t)) : offsetOf(t));
+  return Number.isFinite(n) ? n : 0;
+}
+
+function etdValue(){ return normalizeTimeValue(el('etd').value) || '07:45'; }
+
 function planned(offset){
- return minToTime(
-   timeToMin(
-      el('etd').value||'08:00'
-   )-offset
- );
+  const base = timeToMin(etdValue());
+  return minToTime(base - Number(offset || 0));
 }
-function plannedRange(start,end){
- return{
-   start:planned(start),
-   end:planned(end)
- };}
-function diffMin(a,p){if(!a||!p)return null;let d=timeToMin(a)-timeToMin(p);if(d>720)d-=1440;if(d<-720)d+=1440;return d}
-function diffText(a,p){const d=diffMin(a,p);if(d===null)return '';const s=d<0?'-':'';const x=Math.abs(d);return s+pad(Math.floor(x/60))+':'+pad(x%60)}
-function delayYN(a,p){const d=diffMin(a,p);if(d===null)return '';return d>0?'Yes':'No'}
-function getData(){let d={};try{d=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}d.meta=d.meta||{};d.rows=d.rows||{};return d}
-function setData(d){localStorage.setItem(KEY,JSON.stringify(d))}
-function loadMeta(){const d=getData();el('flightNo').value=d.meta.flightNo||'AI2390/AI2391';el('flightDate').value=d.meta.flightDate||todayISO();el('etd').value=d.meta.etd||'08:00';el('aircraft').value=d.meta.aircraft||'';el('bay').value=d.meta.bay||'';el('preparedBy').value=d.meta.preparedBy||''}
-function saveMeta(){const d=getData();d.meta={flightNo:el('flightNo').value,flightDate:el('flightDate').value,etd:normalizeTimeValue(el('etd').value)||el('etd').value,aircraft:el('aircraft').value,bay:el('bay').value,preparedBy:el('preparedBy').value};setData(d)}
-function saveRows(){
 
- const d=getData();
-
- CHECKLIST.forEach(i=>{
-
-   d.rows[i.stt]=d.rows[i.stt]||{};
-
-   const r=el('reason_'+i.stt);
-
-   if(i.type==="single"){
-
-      const a=el('actual_'+i.stt);
-
-      if(a){
-
-         d.rows[i.stt].actual=
-           normalizeTimeValue(a.value)||a.value;
-      }
-
-   }else{
-
-      const s=el('start_'+i.stt);
-      const e=el('end_'+i.stt);
-
-      if(s){
-
-         d.rows[i.stt].startActual=
-           normalizeTimeValue(s.value)||s.value;
-      }
-
-      if(e){
-
-         d.rows[i.stt].endActual=
-           normalizeTimeValue(e.value)||e.value;
-      }
-
-   }
-
-   if(r){
-
-      d.rows[i.stt].reason=r.value;
-   }
-
- });
-
- setData(d);
-
- updateSummary();
+function plannedRange(t){
+  return { start: planned(planStartOffset(t)), end: planned(planEndOffset(t)) };
 }
-function saveNow(){saveMeta();saveRows();el('sheetStatus').textContent='Đã lưu tạm trên thiết bị này.'}
-    function renderRangeTask(i,r){
 
- const p=plannedRange(i.start,i.end);
+/* Chênh lệch phút (đã xử lý qua nửa đêm) */
+function diffMin(a, p){
+  const am = timeToMin(a), pm = timeToMin(p);
+  if (am === null || pm === null) return null;
+  let d = am - pm;
+  if (d > 720) d -= 1440;
+  if (d < -720) d += 1440;
+  return d;
+}
 
- const startActual=r.startActual||'';
- const endActual=r.endActual||'';
+function diffText(a, p){
+  const d = diffMin(a, p);
+  if (d === null) return '';
+  return (d < 0 ? '-' : '') + pad(Math.floor(Math.abs(d) / 60)) + ':' + pad(Math.abs(d) % 60);
+}
 
- const startDiff=diffText(startActual,p.start);
- const endDiff=diffText(endActual,p.end);
+function delayYN(a, p){
+  const d = diffMin(a, p);
+  if (d === null) return '';
+  return d > 0 ? 'Yes' : 'No';
+}
 
- return `
- <div class="task">
+function taskByStt(stt){
+  return CHECKLIST.find((t) => String(t.stt) === String(stt));
+}
 
-   <div class="row1">
+/* ================= LƯU TRỮ ================= */
+function getData(){
+  let d = {};
+  try { d = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { d = {}; }
+  if (!d || typeof d !== 'object') d = {};
+  if (!d.meta || typeof d.meta !== 'object') d.meta = {};
+  if (!d.rows || typeof d.rows !== 'object') d.rows = {};
+  return d;
+}
 
-      <div class="stt">${i.stt}</div>
+function setData(d){
+  try { localStorage.setItem(KEY, JSON.stringify(d)); }
+  catch (e) { status('Không lưu được trên thiết bị này (có thể do chế độ riêng tư).'); }
+}
 
+function rowOf(stt){
+  const d = getData();
+  return d.rows[stt] || {};
+}
+
+function status(msg){
+  const s = el('sheetStatus');
+  if (s) s.textContent = msg || '';
+}
+
+function loadMeta(){
+  const d = getData();
+  el('flightNo').value = d.meta.flightNo || 'AI2390/AI2391';
+  el('flightDate').value = d.meta.flightDate || todayISO();
+  el('etd').value = d.meta.etd || '07:45';
+  el('aircraft').value = d.meta.aircraft || '';
+  el('bay').value = d.meta.bay || '';
+  el('preparedBy').value = d.meta.preparedBy || '';
+}
+
+function saveMeta(){
+  const d = getData();
+  d.meta = {
+    flightNo: el('flightNo').value,
+    flightDate: el('flightDate').value,
+    etd: normalizeTimeValue(el('etd').value) || el('etd').value,
+    aircraft: el('aircraft').value,
+    bay: el('bay').value,
+    preparedBy: el('preparedBy').value
+  };
+  setData(d);
+}
+
+/* Đọc một hạng mục từ form và trả về dữ liệu để lưu.
+   Trả về null nếu form của hạng mục đó chưa được dựng (tránh ghi đè mất dữ liệu). */
+function readTaskRow(t){
+  const out = { reason: el('reason_' + t.stt) ? el('reason_' + t.stt).value : '' };
+  if (isRange(t)){
+    const s = el('start_' + t.stt), e = el('end_' + t.stt);
+    if (!s && !e) return null;
+    out.startActual = s ? (normalizeTimeValue(s.value) || String(s.value).trim()) : '';
+    out.endActual = e ? (normalizeTimeValue(e.value) || String(e.value).trim()) : '';
+  } else {
+    const a = el('actual_' + t.stt);
+    if (!a) return null;
+    out.actual = normalizeTimeValue(a.value) || String(a.value).trim();
+  }
+  return out;
+}
+
+function commitTask(t){
+  if (!t) return;
+  const row = readTaskRow(t);
+  if (!row) return;
+  const d = getData();
+  d.rows[t.stt] = Object.assign({}, d.rows[t.stt] || {}, row);
+  setData(d);
+}
+
+function commitAll(){
+  const d = getData();
+  CHECKLIST.forEach((t) => {
+    const row = readTaskRow(t);
+    if (!row) return;
+    d.rows[t.stt] = Object.assign({}, d.rows[t.stt] || {}, row);
+  });
+  setData(d);
+  updateSummary();
+}
+
+/* ================= HIỂN THỊ ================= */
+function taskHTML(t, r){
+  const range = isRange(t);
+  const p = range ? plannedRange(t) : { start: planned(planStartOffset(t)), end: '' };
+  const planText = range ? (p.start + ' → ' + p.end) : ('Plan ' + p.start);
+  const head = `
+    <div class="row1">
+      <div class="stt">${esc(t.stt)}</div>
       <div>
-         <div class="name">${i.task}</div>
-         <div class="pic">PIC: ${i.pic}</div>
+        <div class="name">${esc(t.task)}</div>
+        <div class="pic">PIC: ${esc(t.pic || '')}</div>
       </div>
+      <div class="badge" data-plan>${esc(planText)}</div>
+    </div>`;
 
-      <div class="badge">
-         ${p.start} → ${p.end}
-      </div>
+  if (range){
+    const sAct = r.startActual || '', eAct = r.endActual || '';
+    return `
+  <div class="task" data-task="${esc(t.stt)}">
+    ${head}
+    <div class="row2Range">
+      <div><label for="start_${esc(t.stt)}">Start</label>
+        <input class="time" id="start_${esc(t.stt)}" type="text" inputmode="numeric" maxlength="5" autocomplete="off" value="${esc(sAct)}"></div>
+      <div><label for="end_${esc(t.stt)}">End</label>
+        <input class="time" id="end_${esc(t.stt)}" type="text" inputmode="numeric" maxlength="5" autocomplete="off" value="${esc(eAct)}"></div>
+      <div><label>Delay</label>
+        <div class="rangeDelay"><span data-sdiff>-</span><br><br><span data-ediff>-</span></div></div>
+      <div><label for="reason_${esc(t.stt)}">Remark</label>
+        <textarea id="reason_${esc(t.stt)}">${esc(r.reason || '')}</textarea></div>
+    </div>
+    <div class="actions">
+      <button class="btn red" type="button" data-act="now" data-kind="start" data-stt="${esc(t.stt)}">Now Start</button>
+      <button class="btn green" type="button" data-act="now" data-kind="end" data-stt="${esc(t.stt)}">Now End</button>
+      <button class="btn light" type="button" data-act="clear" data-stt="${esc(t.stt)}">Xóa</button>
+    </div>
+  </div>`;
+  }
 
-   </div>
-
-   <div class="row2Range">
-
-      <div>
-         <label>Start</label>
-
-         <input
-            class="time"
-            id="start_${i.stt}"
-            type="text"
-            inputmode="numeric"
-            maxlength="5"
-            value="${startActual}"
-
-            oninput="timeTyping(this)"
-
-            onblur="
-              this.value=normalizeTimeValue(this.value);
-              saveRows();
-              render();
-            "
-         >
-      </div>
-
-      <div>
-         <label>End</label>
-
-         <input
-            class="time"
-            id="end_${i.stt}"
-            type="text"
-            inputmode="numeric"
-            maxlength="5"
-            value="${endActual}"
-
-            oninput="timeTyping(this)"
-
-            onblur="
-              this.value=normalizeTimeValue(this.value);
-              saveRows();
-              render();
-            "
-         >
-      </div>
-
-      <div>
-
-         <label>Delay</label>
-
-         <div class="rangeDelay">
-
-            S:${startDiff||'-'}
-
-            <br><br>
-
-            E:${endDiff||'-'}
-
-         </div>
-
-      </div>
-
-      <div>
-         <label>Remark</label>
-
-         <textarea
-            id="reason_${i.stt}"
-            oninput="saveRows()"
-         >${r.reason||''}</textarea>
-      </div>
-
-   </div>
-
-   <div class="actions">
-
-      <button
-      class="btn red"
-      onclick="stampRangeStart(${i.stt})">
-      Now Start
-      </button>
-
-      <button
-      class="btn green"
-      onclick="stampRangeEnd(${i.stt})">
-      Now End
-      </button>
-
-   </div>
-
- </div>
- `;
+  return `
+  <div class="task" data-task="${esc(t.stt)}">
+    ${head}
+    <div class="row2">
+      <div><label for="actual_${esc(t.stt)}">Actual</label>
+        <input class="time" id="actual_${esc(t.stt)}" type="text" inputmode="numeric" maxlength="5" autocomplete="off" value="${esc(r.actual || '')}"></div>
+      <div><label>Delay</label><div class="delayText" data-yn>-</div></div>
+      <div><label>Diff</label><div class="delayText" data-diff>-</div></div>
+      <div><label for="reason_${esc(t.stt)}">Remark</label>
+        <textarea id="reason_${esc(t.stt)}">${esc(r.reason || '')}</textarea></div>
+    </div>
+    <div class="actions">
+      <button class="btn red" type="button" data-act="now" data-kind="actual" data-stt="${esc(t.stt)}">Now</button>
+      <button class="btn light" type="button" data-act="clear" data-stt="${esc(t.stt)}">Xóa</button>
+    </div>
+  </div>`;
 }
-    if(i.type==="range"){
 
-   el('tasks').insertAdjacentHTML(
-     'beforeend',
-     renderRangeTask(i,r)
-   );
-
-   return;
+function render(){
+  const d = getData();
+  el('tasks').innerHTML = CHECKLIST.map((t) => taskHTML(t, d.rows[t.stt] || {})).join('');
+  CHECKLIST.forEach(refreshTask);
+  updateSummary();
 }
-function render(){saveMeta();const d=getData();el('tasks').innerHTML='';CHECKLIST.forEach(i=>{const r=d.rows[i.stt]||{};const p=planned(i.offsetBeforeETD);const a=r.actual||'';const yn=delayYN(a,p);const dm=diffText(a,p);const cls=a?(yn==='Yes'?'delay':'done'):'';el('tasks').insertAdjacentHTML('beforeend',`<div class="task ${cls}"><div class="row1"><div class="stt">${i.stt}</div><div><div class="name">${i.task}</div><div class="pic">PIC: ${i.pic}</div></div><div class="badge">Plan ${p}</div></div><div class="row2"><div><label>Actual</label><input class="time" id="actual_${i.stt}" type="text" inputmode="numeric" maxlength="5" value="${a}" oninput="timeTyping(this)" onblur="this.value=normalizeTimeValue(this.value);saveRows();render()"></div><div><label>Delay</label><div class="delayText ${yn==='Yes'?'yes':'no'}">${yn||'-'}</div></div><div><label>Diff</label><div class="delayText ${yn==='Yes'?'late':'early'}">${dm||'-'}</div></div><div><label>Remark</label><textarea id="reason_${i.stt}" oninput="saveRows()">${r.reason||''}</textarea></div></div><div class="actions"><button class="btn red" onclick="stamp(${i.stt})">Now</button><button class="btn light" onclick="clearOne(${i.stt})">Xóa</button></div></div>`)});const r=d.rows[i.stt]||{};updateSummary()}
-function stamp(stt){const n=new Date();const v=pad(n.getHours())+':'+pad(n.getMinutes());const a=el('actual_'+stt);if(a)a.value=v;saveRows();render()}
-function stampRangeStart(stt){
 
- const n=new Date();
-
- const v=
-   pad(n.getHours())+
-   ':'+
-   pad(n.getMinutes());
-
- const x=el('start_'+stt);
-
- if(x) x.value=v;
-
- saveRows();
- render();
+function setDiffNode(node, text, late){
+  if (!node) return;
+  node.textContent = text || '-';
+  node.classList.remove('late', 'early');
+  if (text) node.classList.add(late ? 'late' : 'early');
 }
-    function stampRangeEnd(stt){
 
- const n=new Date();
+/* Cập nhật Delay/Diff của một hạng mục mà không dựng lại ô nhập */
+function refreshTask(t){
+  if (!t) return;
+  const card = document.querySelector('[data-task="' + t.stt + '"]');
+  if (!card) return;
+  const r = rowOf(t.stt);
+  const planNode = card.querySelector('[data-plan]');
 
- const v=
-   pad(n.getHours())+
-   ':'+
-   pad(n.getMinutes());
-
- const x=el('end_'+stt);
-
- if(x) x.value=v;
-
- saveRows();
- render();
+  if (isRange(t)){
+    const p = plannedRange(t);
+    if (planNode) planNode.textContent = p.start + ' → ' + p.end;
+    const sDiff = diffText(r.startActual, p.start);
+    const eDiff = diffText(r.endActual, p.end);
+    setDiffNode(card.querySelector('[data-sdiff]'), 'S:' + (sDiff || '-'), diffMin(r.startActual, p.start) > 0);
+    setDiffNode(card.querySelector('[data-ediff]'), 'E:' + (eDiff || '-'), diffMin(r.endActual, p.end) > 0);
+    const any = !!(r.startActual || r.endActual);
+    const bad = (diffMin(r.startActual, p.start) > 0) || (diffMin(r.endActual, p.end) > 0);
+    card.classList.toggle('delay', any && bad);
+    card.classList.toggle('done', any && !bad);
+  } else {
+    const p = planned(planStartOffset(t));
+    if (planNode) planNode.textContent = 'Plan ' + p;
+    const yn = delayYN(r.actual, p);
+    setDiffNode(card.querySelector('[data-yn]'), yn, yn === 'Yes');
+    setDiffNode(card.querySelector('[data-diff]'), diffText(r.actual, p), yn === 'Yes');
+    card.classList.toggle('delay', r.actual ? yn === 'Yes' : false);
+    card.classList.toggle('done', r.actual ? yn !== 'Yes' : false);
+  }
 }
-function clearOne(stt){const a=el('actual_'+stt);if(a)a.value='';saveRows();render()}
-function stampFirstEmpty(){const d=getData();const x=CHECKLIST.find(i=>!((d.rows[i.stt]||{}).actual));if(x)stamp(x.stt)}
-function clearActualTimes(){if(!confirm('Xóa toàn bộ Actual Time?'))return;const d=getData();CHECKLIST.forEach(i=>{d.rows[i.stt]=d.rows[i.stt]||{};d.rows[i.stt].actual=''});setData(d);render()}
-function resetAll(){if(!confirm('Reset toàn bộ dữ liệu trên thiết bị này?'))return;localStorage.removeItem(KEY);loadMeta();render()}
+
 function updateSummary(){
-
- const d=getData();
-
- let done=0;
- let late=0;
- let early=0;
-
- CHECKLIST.forEach(i=>{
-
-   const r=d.rows[i.stt]||{};
-
-   if(i.type==="single"){
-
-      if(r.actual){
-
-         done++;
-
-         if(
-           delayYN(
-             r.actual,
-             planned(i.offset)
-           )==="Yes"
-         ){
-            late++;
-         }else{
-            early++;
-         }
-      }
-
-   }else{
-
-      if(
-         r.startActual ||
-         r.endActual
-      ){
-
-         done++;
-
-         let hasDelay=false;
-
-         const p=plannedRange(
-           i.start,
-           i.end
-         );
-
-         if(
-           r.startActual &&
-           delayYN(
-             r.startActual,
-             p.start
-           )==="Yes"
-         ){
-           hasDelay=true;
-         }
-
-         if(
-           r.endActual &&
-           delayYN(
-             r.endActual,
-             p.end
-           )==="Yes"
-         ){
-           hasDelay=true;
-         }
-
-         if(hasDelay){
-            late++;
-         }else{
-            early++;
-         }
-      }
-
-   }
-
- });
-
- el('summary').innerHTML=`
-
-<div class="card">
-<div class="t">Tổng</div>
-<div class="n">${CHECKLIST.length}</div>
-</div>
-
-<div class="card">
-<div class="t">Đã nhập</div>
-<div class="n">${done}</div>
-</div>
-
-<div class="card">
-<div class="t">Delay</div>
-<div class="n" style="color:#b42318">
-${late}
-</div>
-</div>
-
-<div class="card">
-<div class="t">OK/Early</div>
-<div class="n" style="color:#067647">
-${early}
-</div>
-</div>
-
-`;
-
+  let done = 0, late = 0, early = 0;
+  CHECKLIST.forEach((t) => {
+    const r = rowOf(t.stt);
+    if (isRange(t)){
+      if (!r.startActual && !r.endActual) return;
+      done++;
+      const p = plannedRange(t);
+      const bad = (diffMin(r.startActual, p.start) > 0) || (diffMin(r.endActual, p.end) > 0);
+      if (bad) late++; else early++;
+    } else {
+      if (!r.actual) return;
+      done++;
+      if (diffMin(r.actual, planned(planStartOffset(t))) > 0) late++; else early++;
+    }
+  });
+  el('summary').innerHTML = `
+    <div class="card"><div class="t">Tổng</div><div class="n">${CHECKLIST.length}</div></div>
+    <div class="card"><div class="t">Đã nhập</div><div class="n">${done}</div></div>
+    <div class="card"><div class="t">Delay</div><div class="n" style="color:#b42318">${late}</div></div>
+    <div class="card"><div class="t">OK/Early</div><div class="n" style="color:#067647">${early}</div></div>`;
 }
+
+/* ================= HÀNH ĐỘNG ================= */
+function stamp(t, kind){
+  if (!t) return;
+  const node = el((kind || 'actual') + '_' + t.stt);
+  if (!node) return;
+  node.value = nowHM();
+  commitTask(t);
+  saveMeta();
+  refreshTask(t);
+  updateSummary();
+}
+
+function clearTask(t){
+  if (!t) return;
+  if (isRange(t)){
+    const s = el('start_' + t.stt), e = el('end_' + t.stt);
+    if (s) s.value = '';
+    if (e) e.value = '';
+  } else {
+    const a = el('actual_' + t.stt);
+    if (a) a.value = '';
+  }
+  commitTask(t);
+  refreshTask(t);
+  updateSummary();
+}
+
+function firstEmptyTask(){
+  return CHECKLIST.find((t) => {
+    const r = rowOf(t.stt);
+    return isRange(t) ? (!r.startActual && !r.endActual) : !r.actual;
+  });
+}
+
+function stampFirstEmpty(){
+  const t = firstEmptyTask();
+  if (!t) { status('Đã nhập đủ tất cả hạng mục.'); return; }
+  stamp(t, isRange(t) ? 'start' : 'actual');
+  status('Đã đóng giờ cho mục ' + t.stt + ': ' + t.task);
+  const node = el((isRange(t) ? 'start_' : 'actual_') + t.stt);
+  if (node) node.scrollIntoView({ block: 'center', behavior: 'smooth' });
+}
+
+function clearActualTimes(){
+  const d = getData();
+  CHECKLIST.forEach((t) => {
+    d.rows[t.stt] = d.rows[t.stt] || {};
+    if (isRange(t)){
+      d.rows[t.stt].startActual = '';
+      d.rows[t.stt].endActual = '';
+    } else {
+      d.rows[t.stt].actual = '';
+    }
+  });
+  setData(d);
+  render();
+  status('Đã xóa toàn bộ giờ (phần Remark vẫn giữ).');
+}
+
+function resetAll(){
+  try { localStorage.removeItem(KEY); } catch (e) {}
+  loadMeta();
+  render();
+  status('Đã reset dữ liệu trên thiết bị này.');
+}
+
+function saveNow(){
+  commitAll();
+  saveMeta();
+  status('Đã lưu trên thiết bị này.');
+}
+
+/* ================= XUẤT DỮ LIỆU ================= */
 function exportRows(){
-
- saveRows();
-
- const d=getData();
-
- return CHECKLIST.map(i=>{
-
-   const r=d.rows[i.stt]||{};
-
-   if(i.type==="single"){
-
-      const p=planned(i.offset);
-
+  commitAll();
+  const d = getData();
+  return CHECKLIST.map((t) => {
+    const r = d.rows[t.stt] || {};
+    const p = isRange(t) ? plannedRange(t) : { start: planned(planStartOffset(t)), end: '' };
+    if (isRange(t)){
       return {
-
-        STT:i.stt,
-
-        Task:i.task,
-
-        PlanStart:p,
-        PlanEnd:'',
-
-        ActualStart:r.actual||'',
-        ActualEnd:'',
-
-        DelayStart:
-          diffText(r.actual,p),
-
-        DelayEnd:'',
-
-        PIC:i.pic,
-
-        Remark:r.reason||''
+        STT: t.stt, Task: t.task,
+        PlanStart: p.start, PlanEnd: p.end,
+        ActualStart: r.startActual || '', ActualEnd: r.endActual || '',
+        DelayStart: diffText(r.startActual, p.start), DelayEnd: diffText(r.endActual, p.end),
+        PIC: t.pic || '', Remark: r.reason || ''
       };
-   }
-
-   const p=plannedRange(
-      i.start,
-      i.end
-   );
-
-   return {
-
-      STT:i.stt,
-
-      Task:i.task,
-
-      PlanStart:p.start,
-      PlanEnd:p.end,
-
-      ActualStart:
-        r.startActual||'',
-
-      ActualEnd:
-        r.endActual||'',
-
-      DelayStart:
-        diffText(
-         r.startActual,
-         p.start
-        ),
-
-      DelayEnd:
-        diffText(
-         r.endActual,
-         p.end
-        ),
-
-      PIC:i.pic,
-
-      Remark:r.reason||''
-   };
-
- });
-
+    }
+    return {
+      STT: t.stt, Task: t.task,
+      PlanStart: p.start, PlanEnd: '',
+      ActualStart: r.actual || '', ActualEnd: '',
+      DelayStart: diffText(r.actual, p.start), DelayEnd: '',
+      PIC: t.pic || '', Remark: r.reason || ''
+    };
+  });
 }
-function xmlEsc(v){return String(v==null?'':v).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;')}
-function downloadExcel(){const rows=exportRows();const meta=[['Flight No.',el('flightNo').value],['Date',el('flightDate').value],['ETD',el('etd').value],['Aircraft / Reg.',el('aircraft').value],['Bay',el('bay').value],['Prepared by',el('preparedBy').value]];const headers=[
 
-'STT',
+function xmlEsc(v){
+  return String(v == null ? '' : v)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
 
-'Task',
+function downloadBlob(content, filename, type){
+  const blob = new Blob([content], { type: type });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.style.display = 'none';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { URL.revokeObjectURL(url); if (a.parentNode) a.parentNode.removeChild(a); }, 2000);
+}
 
-'PlanStart',
-'PlanEnd',
+function downloadExcel(){
+  const rows = exportRows();
+  const meta = [
+    ['Flight No.', el('flightNo').value],
+    ['Date', el('flightDate').value],
+    ['ETD', etdValue()],
+    ['Aircraft / Reg.', el('aircraft').value],
+    ['Bay', el('bay').value],
+    ['Prepared by', el('preparedBy').value]
+  ];
+  const headers = ['STT','Task','PlanStart','PlanEnd','ActualStart','ActualEnd','DelayStart','DelayEnd','PIC','Remark'];
+  const widths = [45, 240, 85, 85, 85, 85, 85, 85, 120, 260];
 
-'ActualStart',
-'ActualEnd',
+  let x = '<?xml version="1.0"?><Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">'
+    + '<Styles><Style ss:ID="h"><Font ss:Bold="1"/><Interior ss:Color="#D9EAF7" ss:Pattern="Solid"/><Alignment ss:WrapText="1"/></Style>'
+    + '<Style ss:ID="wrap"><Alignment ss:WrapText="1" Vertical="Top"/></Style></Styles>'
+    + '<Worksheet ss:Name="Checklist"><Table>';
+  widths.forEach((w) => { x += '<Column ss:Width="' + w + '"/>'; });
+  meta.forEach((m) => {
+    x += '<Row><Cell ss:StyleID="h"><Data ss:Type="String">' + xmlEsc(m[0]) + '</Data></Cell>'
+      + '<Cell><Data ss:Type="String">' + xmlEsc(m[1]) + '</Data></Cell></Row>';
+  });
+  x += '<Row></Row><Row>';
+  headers.forEach((h) => { x += '<Cell ss:StyleID="h"><Data ss:Type="String">' + xmlEsc(h) + '</Data></Cell>'; });
+  x += '</Row>';
+  rows.forEach((r) => {
+    x += '<Row>';
+    headers.forEach((h) => { x += '<Cell ss:StyleID="wrap"><Data ss:Type="String">' + xmlEsc(r[h]) + '</Data></Cell>'; });
+    x += '</Row>';
+  });
+  x += '</Table></Worksheet></Workbook>';
 
-'DelayStart',
-'DelayEnd',
+  const name = 'Checklist_' + String(el('flightNo').value).replaceAll('/', '-') + '_' + el('flightDate').value + '.xls';
+  downloadBlob('\ufeff' + x, name, 'application/vnd.ms-excel;charset=utf-8');
+  status('Đã tạo file Excel.');
+}
 
-'PIC',
+function copyText(text){
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    return navigator.clipboard.writeText(text);
+  }
+  return new Promise((resolve, reject) => {
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      const ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      ok ? resolve() : reject(new Error('execCommand failed'));
+    } catch (e) { reject(e); }
+  });
+}
 
-'Remark'
-
-];let x=`<?xml version="1.0"?><Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"><Styles><Style ss:ID="h"><Font ss:Bold="1"/><Interior ss:Color="#D9EAF7" ss:Pattern="Solid"/><Alignment ss:WrapText="1"/></Style><Style ss:ID="wrap"><Alignment ss:WrapText="1" Vertical="Top"/></Style></Styles><Worksheet ss:Name="Checklist"><Table><Column ss:Width="45"/>
-
-<Column ss:Width="240"/>
-
-<Column ss:Width="85"/>
-<Column ss:Width="85"/>
-
-<Column ss:Width="85"/>
-<Column ss:Width="85"/>
-
-<Column ss:Width="85"/>
-<Column ss:Width="85"/>
-
-<Column ss:Width="120"/>
-
-<Column ss:Width="260"/>`;meta.forEach(m=>{x+=`<Row><Cell ss:StyleID="h"><Data ss:Type="String">${xmlEsc(m[0])}</Data></Cell><Cell><Data ss:Type="String">${xmlEsc(m[1])}</Data></Cell></Row>`});x+=`<Row></Row><Row>`;headers.forEach(h=>{x+=`<Cell ss:StyleID="h"><Data ss:Type="String">${xmlEsc(h)}</Data></Cell>`});x+=`</Row>`;rows.forEach(r=>{x+=`<Row>`;headers.forEach(h=>{x+=`<Cell ss:StyleID="wrap"><Data ss:Type="String">${xmlEsc(r[h])}</Data></Cell>`});x+=`</Row>`});x+=`</Table></Worksheet></Workbook>`;downloadBlob(x,'Checklist_'+el('flightNo').value.replaceAll('/','-')+'_'+el('flightDate').value+'.xls','application/vnd.ms-excel;charset=utf-8;')}
-function downloadBlob(content,filename,type){const blob=new Blob([content],{type:type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;a.click();URL.revokeObjectURL(url)}
 function copyReport(){
-
- const rows=exportRows();
-
- let t='CHECKLIST TURNAROUND AIR INDIA\\n';
-
- t+='Flight No.: '+el('flightNo').value+'\\n';
-
- t+='Date: '+el('flightDate').value+'\\n';
-
- t+='ETD: '+el('etd').value+'\\n';
-
- t+='Aircraft: '+el('aircraft').value+'\\n';
-
- t+='Bay: '+el('bay').value+'\\n';
-
- t+='Prepared by: '+el('preparedBy').value+'\\n\\n';
-
- rows.forEach(r=>{
-
-   if(r.PlanEnd){
-
-      t+=
-      r.STT+'. '+r.Task+
-      ' | Plan '+r.PlanStart+
-      ' → '+r.PlanEnd+
-
-      ' | Actual '+
-      (r.ActualStart||'-')+
-      ' → '+
-      (r.ActualEnd||'-')+
-
-      ' | D.S '+
-      (r.DelayStart||'-')+
-
-      ' | D.E '+
-      (r.DelayEnd||'-')+
-
-      ' | '+(r.Remark||'')+
-
-      '\\n';
-
-   }else{
-
-      t+=
-      r.STT+'. '+r.Task+
-
-      ' | Plan '+r.PlanStart+
-
-      ' | Actual '+
-      (r.ActualStart||'-')+
-
-      ' | Diff '+
-      (r.DelayStart||'-')+
-
-      ' | '+(r.Remark||'')+
-
-      '\\n';
-   }
-
- });
-
- navigator.clipboard
- .writeText(t)
- .then(()=>alert('Đã copy báo cáo'));
-
+  const rows = exportRows();
+  const lines = [];
+  lines.push('CHECKLIST TURNAROUND AIR INDIA');
+  lines.push('Flight No.: ' + el('flightNo').value);
+  lines.push('Date: ' + el('flightDate').value);
+  lines.push('ETD: ' + etdValue());
+  lines.push('Aircraft: ' + el('aircraft').value);
+  lines.push('Bay: ' + el('bay').value);
+  lines.push('Prepared by: ' + el('preparedBy').value);
+  lines.push('');
+  rows.forEach((r) => {
+    if (r.PlanEnd){
+      lines.push(r.STT + '. ' + r.Task + ' | Plan ' + r.PlanStart + ' → ' + r.PlanEnd
+        + ' | Actual ' + (r.ActualStart || '-') + ' → ' + (r.ActualEnd || '-')
+        + ' | D.S ' + (r.DelayStart || '-') + ' | D.E ' + (r.DelayEnd || '-')
+        + ' | ' + (r.Remark || ''));
+    } else {
+      lines.push(r.STT + '. ' + r.Task + ' | Plan ' + r.PlanStart
+        + ' | Actual ' + (r.ActualStart || '-')
+        + ' | Diff ' + (r.DelayStart || '-')
+        + ' | ' + (r.Remark || ''));
+    }
+  });
+  const text = lines.join('\n');
+  copyText(text)
+    .then(() => { status('Đã copy báo cáo.'); alert('Đã copy báo cáo'); })
+    .catch(() => {
+      status('Trình duyệt chặn clipboard. Dùng nút Excel hoặc copy thủ công.');
+      alert('Không copy được (trình duyệt chặn clipboard).');
+    });
 }
+
+/* ================= GỬI GOOGLE SHEETS ================= */
 function buildPayload(){
-
- const rows=exportRows();
-
- return {
-
-   recordKey:
-     (el('flightDate').value+'_'+
-      el('flightNo').value)
-      .replaceAll('/','-')
-      .replaceAll(' ','_'),
-
-   savedAtLocal:
-     new Date().toISOString(),
-
-   flightNo:
-     el('flightNo').value,
-
-   flightDate:
-     el('flightDate').value,
-
-   etd:
-     normalizeTimeValue(
-       el('etd').value
-     ),
-
-   aircraft:
-     el('aircraft').value,
-
-   bay:
-     el('bay').value,
-
-   preparedBy:
-     el('preparedBy').value,
-
-   totalTasks:
-     CHECKLIST.length,
-
-   completedTasks:
-     rows.filter(r =>
-       r.ActualStart ||
-       r.ActualEnd
-     ).length,
-
-   rows:rows
-
- };
-
+  const rows = exportRows();
+  return {
+    recordKey: (el('flightDate').value + '_' + el('flightNo').value).replaceAll('/', '-').replaceAll(' ', '_'),
+    savedAtLocal: new Date().toISOString(),
+    flightNo: el('flightNo').value,
+    flightDate: el('flightDate').value,
+    etd: etdValue(),
+    aircraft: el('aircraft').value,
+    bay: el('bay').value,
+    preparedBy: el('preparedBy').value,
+    totalTasks: CHECKLIST.length,
+    completedTasks: rows.filter((r) => r.ActualStart || r.ActualEnd).length,
+    rows: rows
+  };
 }
-function submitToGoogleSheets(){if(!GOOGLE_SCRIPT_URL||GOOGLE_SCRIPT_URL.indexOf('https://script.google.com/macros/s/AKfycbxof5_Kb0sMaIYFTjRl232IHWymr84er1fzCeIXPtn3JYidnjFqBgRU2z4G8CImfS5YiA/exec')>=0){alert('Chưa dán Web App URL của Google Apps Script vào index.html.');return}const payload=buildPayload();if(!payload.flightNo||!payload.flightDate){alert('Cần nhập Flight No. và Date.');return}el('sheetStatus').textContent='Đang gửi dữ liệu lên Google Sheets...';let iframe=el('gs_iframe');if(!iframe){iframe=document.createElement('iframe');iframe.name='gs_iframe';iframe.id='gs_iframe';iframe.style.display='none';document.body.appendChild(iframe)}const form=document.createElement('form');form.method='POST';form.action=GOOGLE_SCRIPT_URL;form.target='gs_iframe';form.style.display='none';const input=document.createElement('input');input.type='hidden';input.name='payload';input.value=JSON.stringify(payload);form.appendChild(input);document.body.appendChild(form);form.submit();setTimeout(()=>{document.body.removeChild(form);el('sheetStatus').textContent='Đã gửi yêu cầu. Mở Google Sheets kiểm tra tab SUMMARY và ngày bay.';alert('Đã gửi yêu cầu lên Google Sheets.')} ,900)}
-['flightNo','flightDate','etd','aircraft','bay','preparedBy'].forEach(id=>el(id).addEventListener('input',render));
-loadMeta();render();
+
+function submitToGoogleSheets(){
+  if (!/^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(GOOGLE_SCRIPT_URL || '')){
+    alert('Chưa dán URL Web App (.../exec) của Google Apps Script vào biến GOOGLE_SCRIPT_URL trong file.');
+    return;
+  }
+  const payload = buildPayload();
+  if (!payload.flightNo || !payload.flightDate){
+    alert('Cần nhập Flight No. và Date.');
+    return;
+  }
+
+  const btn = el('btnSend');
+  if (btn) btn.disabled = true;
+  status('Đang gửi dữ liệu lên Google Sheets...');
+
+  let iframe = el('gs_iframe');
+  if (!iframe){
+    iframe = document.createElement('iframe');
+    iframe.name = 'gs_iframe';
+    iframe.id = 'gs_iframe';
+    iframe.style.display = 'none';
+    iframe.title = 'Google Sheets';
+    document.body.appendChild(iframe);
+  }
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.action = GOOGLE_SCRIPT_URL;
+  form.target = 'gs_iframe';
+  form.style.display = 'none';
+  const input = document.createElement('input');
+  input.type = 'hidden';
+  input.name = 'payload';
+  input.value = JSON.stringify(payload);
+  form.appendChild(input);
+  document.body.appendChild(form);
+  form.submit();
+
+  setTimeout(() => {
+    if (form.parentNode) form.parentNode.removeChild(form);
+    if (btn) btn.disabled = false;
+    status('Đã gửi yêu cầu. Mở Google Sheets kiểm tra tab SUMMARY và ngày bay.');
+    alert('Đã gửi yêu cầu lên Google Sheets.');
+  }, 1000);
+}
+
+/* ================= GẮN SỰ KIỆN ================= */
+let saveTimer = null;
+function queueSave(t){
+  if (saveTimer) clearTimeout(saveTimer);
+  saveTimer = setTimeout(() => { commitTask(t); updateSummary(); }, 300);
+}
+
+function wire(){
+  /* Thông tin chuyến bay */
+  ['flightNo', 'aircraft', 'bay', 'preparedBy', 'flightDate'].forEach((id) => {
+    const n = el(id);
+    if (n) n.addEventListener('input', saveMeta);
+  });
+
+  /* ETD: gõ số tự thêm dấu hai chấm, rời ô thì chuẩn hóa và tính lại giờ kế hoạch */
+  el('etd').addEventListener('input', () => timeTyping(el('etd')));
+  el('etd').addEventListener('focusout', () => {
+    const v = normalizeTimeValue(el('etd').value);
+    el('etd').value = v || '07:45';
+    saveMeta();
+    CHECKLIST.forEach(refreshTask);
+    updateSummary();
+  });
+
+  /* Nút trên header + panel */
+  el('btnSave').addEventListener('click', saveNow);
+  el('btnStampNext').addEventListener('click', stampFirstEmpty);
+  el('btnClearTimes').addEventListener('click', () => {
+    if (confirm('Xóa toàn bộ Actual Time?')) clearActualTimes();
+  });
+  el('btnReset').addEventListener('click', () => {
+    if (confirm('Reset toàn bộ dữ liệu trên thiết bị này?')) resetAll();
+  });
+  el('btnExcel').addEventListener('click', downloadExcel);
+  el('btnCopy').addEventListener('click', copyReport);
+  el('btnSend').addEventListener('click', submitToGoogleSheets);
+
+  /* Danh sách hạng mục: ủy quyền sự kiện nên render lại vẫn hoạt động */
+  const tasks = el('tasks');
+
+  tasks.addEventListener('input', (e) => {
+    const n = e.target;
+    if (n.matches('input.time')) { timeTyping(n); return; }
+    if (n.matches('textarea')){
+      const card = n.closest('[data-task]');
+      if (card) queueSave(taskByStt(card.dataset.task));
+    }
+  });
+
+  tasks.addEventListener('focusout', (e) => {
+    const n = e.target;
+    const card = n.closest('[data-task]');
+    if (!card) return;
+    const t = taskByStt(card.dataset.task);
+    if (!t) return;
+
+    if (n.matches('input.time')){
+      const raw = String(n.value || '').trim();
+      const v = normalizeTimeValue(raw);
+      n.value = v;
+      commitTask(t);
+      refreshTask(t);
+      updateSummary();
+      if (raw && !v) status('Giờ "' + raw + '" không hợp lệ - nhập 0715 hoặc 07:15.');
+      else status('Đã lưu trên thiết bị này.');
+    } else if (n.matches('textarea')){
+      commitTask(t);
+      status('Đã lưu trên thiết bị này.');
+    }
+  });
+
+  tasks.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && e.target.matches('input.time')){ e.preventDefault(); e.target.blur(); }
+  });
+
+  tasks.addEventListener('click', (e) => {
+    const b = e.target.closest('button[data-act]');
+    if (!b) return;
+    const t = taskByStt(b.dataset.stt);
+    if (!t) return;
+    if (b.dataset.act === 'now') stamp(t, b.dataset.kind || 'actual');
+    else if (b.dataset.act === 'clear') clearTask(t);
+  });
+
+  /* Lưu trước khi đóng trang */
+  window.addEventListener('beforeunload', () => { try { commitAll(); saveMeta(); } catch (e) {} });
+
+  /* Hiển thị lỗi thay vì màn hình trắng */
+  window.addEventListener('error', (e) => {
+    status('Lỗi: ' + (e.message || 'không xác định') + '. Hãy tải lại trang (Ctrl+F5).');
+  });
+}
+
+/* ================= KHỞI ĐỘNG ================= */
+function init(){
+  try {
+    loadMeta();
+    render();
+    wire();
+    status('');
+  } catch (err) {
+    console.error(err);
+    status('Lỗi khởi tạo: ' + (err && err.message ? err.message : err));
+  }
+}
+
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+else init();
 </script>
-</body></html>
+</body>
+</html>
