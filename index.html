@@ -93,7 +93,7 @@ footer.copyright{text-align:center;font-size:10px;color:var(--muted);padding:12p
 'use strict';
 /* ================= CẤU HÌNH ================= */
 /* URL Web App Google Apps Script (phải kết thúc bằng /exec) */
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbytEw7OgR_fyqlA5F_MIiBOjjceknE01JJsLfLYjVFjKvMG_NCtrG-LpGDit5DS5Vgh3A/exec';
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyqN_TKoQzBa2QAJgBoo6oTQFzAVH3A_-YQ2h9d5h4uenOUFIVkSc72jJzWTw892WkRtA/exec';
 
 /* Danh sách hạng mục: offsetBeforeETD = số phút trước ETD.
    (Có thể dùng "type":"range" kèm "start"/"end" cho hạng mục có giờ bắt đầu/kết thúc) */
@@ -551,8 +551,8 @@ function downloadExcel(){
     ['Bay', el('bay').value],
     ['Prepared by', el('preparedBy').value]
   ];
-  const headers = ['STT','Task','PlanStart','PlanEnd','ActualStart','ActualEnd','DelayStart','DelayEnd','PIC','Remark'];
-  const widths = [45, 240, 85, 85, 85, 85, 85, 85, 120, 260];
+  const headers = ['STT','Task','PlanStart','ActualStart','DelayStart','PIC','Remark'];
+  const widths = [45, 240, 95, 95, 95, 120, 280];
 
   let x = '<?xml version="1.0"?><Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">'
     + '<Styles><Style ss:ID="h"><Font ss:Bold="1"/><Interior ss:Color="#D9EAF7" ss:Pattern="Solid"/><Alignment ss:WrapText="1"/></Style>'
