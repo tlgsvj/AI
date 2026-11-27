@@ -16,6 +16,24 @@ input,textarea{width:100%;border:1px solid #cfd6e4;border-radius:8px;padding:7px
 .task{background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:7px;padding:8px}.task.done{background:#f0fdf4}.task.delay{background:#fff7ed}
 .row1{display:grid;grid-template-columns:30px 1fr auto;gap:6px;align-items:start}.stt{font-size:12px;font-weight:900;color:#fff;background:#344054;border-radius:999px;text-align:center;padding:3px 0}.name{font-size:13px;font-weight:900;line-height:1.2}.pic{font-size:10px;color:var(--muted);margin-top:2px}.badge{font-size:10px;font-weight:900;border-radius:999px;padding:3px 6px;background:#eef2ff;color:#1d4ed8;white-space:nowrap}
 .row2{display:grid;grid-template-columns:70px 82px 80px 1fr;gap:5px;align-items:end;margin-top:7px}.delayText{text-align:center;font-size:12px;font-weight:900;padding:7px 2px;border-radius:8px;background:#f8fafc;border:1px solid var(--line);min-height:34px}.yes,.late{color:#b42318}.no,.early{color:#067647}
+.row2Range{
+ display:grid;
+ grid-template-columns:75px 75px 95px 1fr;
+ gap:5px;
+ align-items:end;
+ margin-top:7px;
+}
+
+.rangeDelay{
+ text-align:center;
+ font-size:11px;
+ font-weight:900;
+ padding:5px;
+ border-radius:8px;
+ background:#f8fafc;
+ border:1px solid #dde2ea;
+ min-height:60px;
+}
 .status{font-size:12px;color:var(--blue);font-weight:700;margin-top:6px}.topActions{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
 @media(min-width:850px){main{max-width:1280px}.grid{grid-template-columns:repeat(6,1fr)}#tasks{display:grid;grid-template-columns:1fr 1fr;gap:8px}.task{margin-bottom:0}}
 @media(max-width:390px){.row2{grid-template-columns:60px 75px 72px 1fr;gap:4px}input,textarea{font-size:15px;padding:6px}.btn{font-size:11px;padding:7px 7px}}
@@ -43,7 +61,14 @@ function normalizeTimeValue(v){if(!v)return '';v=String(v).trim();if(/^\d{1,2}:\
 function timeTyping(input){let d=onlyDigits(input.value).slice(0,4);input.value=d.length>=3?d.slice(0,2)+':'+d.slice(2):d}
 function timeToMin(t){t=normalizeTimeValue(t);if(!t)return null;const a=t.split(':').map(Number);return a[0]*60+a[1]}
 function minToTime(m){m=((m%1440)+1440)%1440;return pad(Math.floor(m/60))+':'+pad(m%60)}
-function planned(offsetBeforeETD){return minToTime(timeToMin(el('etd').value||'08:00')-offsetBeforeETD)}
+function planned(offsetBeforeETD)
+function plannedRange(start,end){
+ return{
+   start:planned(start),
+   end:planned(end)
+ };
+}
+{return minToTime(timeToMin(el('etd').value||'08:00')-offsetBeforeETD)}
 function diffMin(a,p){if(!a||!p)return null;let d=timeToMin(a)-timeToMin(p);if(d>720)d-=1440;if(d<-720)d+=1440;return d}
 function diffText(a,p){const d=diffMin(a,p);if(d===null)return '';const s=d<0?'-':'';const x=Math.abs(d);return s+pad(Math.floor(x/60))+':'+pad(x%60)}
 function delayYN(a,p){const d=diffMin(a,p);if(d===null)return '';return d>0?'Yes':'No'}
@@ -51,22 +76,559 @@ function getData(){let d={};try{d=JSON.parse(localStorage.getItem(KEY)||'{}')}ca
 function setData(d){localStorage.setItem(KEY,JSON.stringify(d))}
 function loadMeta(){const d=getData();el('flightNo').value=d.meta.flightNo||'AI2390/AI2391';el('flightDate').value=d.meta.flightDate||todayISO();el('etd').value=d.meta.etd||'08:00';el('aircraft').value=d.meta.aircraft||'';el('bay').value=d.meta.bay||'';el('preparedBy').value=d.meta.preparedBy||''}
 function saveMeta(){const d=getData();d.meta={flightNo:el('flightNo').value,flightDate:el('flightDate').value,etd:normalizeTimeValue(el('etd').value)||el('etd').value,aircraft:el('aircraft').value,bay:el('bay').value,preparedBy:el('preparedBy').value};setData(d)}
-function saveRows(){const d=getData();CHECKLIST.forEach(i=>{d.rows[i.stt]=d.rows[i.stt]||{};let a=el('actual_'+i.stt),r=el('reason_'+i.stt);if(a)d.rows[i.stt].actual=normalizeTimeValue(a.value)||a.value;if(r)d.rows[i.stt].reason=r.value});setData(d);updateSummary()}
+function saveRows(){
+
+ const d=getData();
+
+ CHECKLIST.forEach(i=>{
+
+   d.rows[i.stt]=d.rows[i.stt]||{};
+
+   const r=el('reason_'+i.stt);
+
+   if(i.type==="single"){
+
+      const a=el('actual_'+i.stt);
+
+      if(a){
+
+         d.rows[i.stt].actual=
+           normalizeTimeValue(a.value)||a.value;
+      }
+
+   }else{
+
+      const s=el('start_'+i.stt);
+      const e=el('end_'+i.stt);
+
+      if(s){
+
+         d.rows[i.stt].startActual=
+           normalizeTimeValue(s.value)||s.value;
+      }
+
+      if(e){
+
+         d.rows[i.stt].endActual=
+           normalizeTimeValue(e.value)||e.value;
+      }
+
+   }
+
+   if(r){
+
+      d.rows[i.stt].reason=r.value;
+   }
+
+ });
+
+ setData(d);
+
+ updateSummary();
+}
 function saveNow(){saveMeta();saveRows();el('sheetStatus').textContent='Đã lưu tạm trên thiết bị này.'}
-function render(){saveMeta();const d=getData();el('tasks').innerHTML='';CHECKLIST.forEach(i=>{const r=d.rows[i.stt]||{};const p=planned(i.offsetBeforeETD);const a=r.actual||'';const yn=delayYN(a,p);const dm=diffText(a,p);const cls=a?(yn==='Yes'?'delay':'done'):'';el('tasks').insertAdjacentHTML('beforeend',`<div class="task ${cls}"><div class="row1"><div class="stt">${i.stt}</div><div><div class="name">${i.task}</div><div class="pic">PIC: ${i.pic}</div></div><div class="badge">Plan ${p}</div></div><div class="row2"><div><label>Actual</label><input class="time" id="actual_${i.stt}" type="text" inputmode="numeric" maxlength="5" value="${a}" oninput="timeTyping(this)" onblur="this.value=normalizeTimeValue(this.value);saveRows();render()"></div><div><label>Delay</label><div class="delayText ${yn==='Yes'?'yes':'no'}">${yn||'-'}</div></div><div><label>Diff</label><div class="delayText ${yn==='Yes'?'late':'early'}">${dm||'-'}</div></div><div><label>Remark</label><textarea id="reason_${i.stt}" oninput="saveRows()">${r.reason||''}</textarea></div></div><div class="actions"><button class="btn red" onclick="stamp(${i.stt})">Now</button><button class="btn light" onclick="clearOne(${i.stt})">Xóa</button></div></div>`)});updateSummary()}
+    function renderRangeTask(i,r){
+
+ const p=plannedRange(i.start,i.end);
+
+ const startActual=r.startActual||'';
+ const endActual=r.endActual||'';
+
+ const startDiff=diffText(startActual,p.start);
+ const endDiff=diffText(endActual,p.end);
+
+ return `
+ <div class="task">
+
+   <div class="row1">
+
+      <div class="stt">${i.stt}</div>
+
+      <div>
+         <div class="name">${i.task}</div>
+         <div class="pic">PIC: ${i.pic}</div>
+      </div>
+
+      <div class="badge">
+         ${p.start} → ${p.end}
+      </div>
+
+   </div>
+
+   <div class="row2Range">
+
+      <div>
+         <label>Start</label>
+
+         <input
+            class="time"
+            id="start_${i.stt}"
+            type="text"
+            inputmode="numeric"
+            maxlength="5"
+            value="${startActual}"
+
+            oninput="timeTyping(this)"
+
+            onblur="
+              this.value=normalizeTimeValue(this.value);
+              saveRows();
+              render();
+            "
+         >
+      </div>
+
+      <div>
+         <label>End</label>
+
+         <input
+            class="time"
+            id="end_${i.stt}"
+            type="text"
+            inputmode="numeric"
+            maxlength="5"
+            value="${endActual}"
+
+            oninput="timeTyping(this)"
+
+            onblur="
+              this.value=normalizeTimeValue(this.value);
+              saveRows();
+              render();
+            "
+         >
+      </div>
+
+      <div>
+
+         <label>Delay</label>
+
+         <div class="rangeDelay">
+
+            S:${startDiff||'-'}
+
+            <br><br>
+
+            E:${endDiff||'-'}
+
+         </div>
+
+      </div>
+
+      <div>
+         <label>Remark</label>
+
+         <textarea
+            id="reason_${i.stt}"
+            oninput="saveRows()"
+         >${r.reason||''}</textarea>
+      </div>
+
+   </div>
+
+   <div class="actions">
+
+      <button
+      class="btn red"
+      onclick="stampRangeStart(${i.stt})">
+      Now Start
+      </button>
+
+      <button
+      class="btn green"
+      onclick="stampRangeEnd(${i.stt})">
+      Now End
+      </button>
+
+   </div>
+
+ </div>
+ `;
+}
+    if(i.type==="range"){
+
+   el('tasks').insertAdjacentHTML(
+     'beforeend',
+     renderRangeTask(i,r)
+   );
+
+   return;
+}
+function render(){saveMeta();const d=getData();el('tasks').innerHTML='';CHECKLIST.forEach(i=>{const r=d.rows[i.stt]||{};const p=planned(i.offsetBeforeETD);const a=r.actual||'';const yn=delayYN(a,p);const dm=diffText(a,p);const cls=a?(yn==='Yes'?'delay':'done'):'';el('tasks').insertAdjacentHTML('beforeend',`<div class="task ${cls}"><div class="row1"><div class="stt">${i.stt}</div><div><div class="name">${i.task}</div><div class="pic">PIC: ${i.pic}</div></div><div class="badge">Plan ${p}</div></div><div class="row2"><div><label>Actual</label><input class="time" id="actual_${i.stt}" type="text" inputmode="numeric" maxlength="5" value="${a}" oninput="timeTyping(this)" onblur="this.value=normalizeTimeValue(this.value);saveRows();render()"></div><div><label>Delay</label><div class="delayText ${yn==='Yes'?'yes':'no'}">${yn||'-'}</div></div><div><label>Diff</label><div class="delayText ${yn==='Yes'?'late':'early'}">${dm||'-'}</div></div><div><label>Remark</label><textarea id="reason_${i.stt}" oninput="saveRows()">${r.reason||''}</textarea></div></div><div class="actions"><button class="btn red" onclick="stamp(${i.stt})">Now</button><button class="btn light" onclick="clearOne(${i.stt})">Xóa</button></div></div>`)});const r=d.rows[i.stt]||{};updateSummary()}
 function stamp(stt){const n=new Date();const v=pad(n.getHours())+':'+pad(n.getMinutes());const a=el('actual_'+stt);if(a)a.value=v;saveRows();render()}
+function stampRangeStart(stt){
+
+ const n=new Date();
+
+ const v=
+   pad(n.getHours())+
+   ':'+
+   pad(n.getMinutes());
+
+ const x=el('start_'+stt);
+
+ if(x) x.value=v;
+
+ saveRows();
+ render();
+}
+    function stampRangeEnd(stt){
+
+ const n=new Date();
+
+ const v=
+   pad(n.getHours())+
+   ':'+
+   pad(n.getMinutes());
+
+ const x=el('end_'+stt);
+
+ if(x) x.value=v;
+
+ saveRows();
+ render();
+}
 function clearOne(stt){const a=el('actual_'+stt);if(a)a.value='';saveRows();render()}
 function stampFirstEmpty(){const d=getData();const x=CHECKLIST.find(i=>!((d.rows[i.stt]||{}).actual));if(x)stamp(x.stt)}
 function clearActualTimes(){if(!confirm('Xóa toàn bộ Actual Time?'))return;const d=getData();CHECKLIST.forEach(i=>{d.rows[i.stt]=d.rows[i.stt]||{};d.rows[i.stt].actual=''});setData(d);render()}
 function resetAll(){if(!confirm('Reset toàn bộ dữ liệu trên thiết bị này?'))return;localStorage.removeItem(KEY);loadMeta();render()}
-function updateSummary(){const d=getData();let done=0,late=0,early=0;CHECKLIST.forEach(i=>{const r=d.rows[i.stt]||{};if(r.actual){done++;delayYN(r.actual,planned(i.offsetBeforeETD))==='Yes'?late++:early++}});el('summary').innerHTML=`<div class="card"><div class="t">Tổng</div><div class="n">${CHECKLIST.length}</div></div><div class="card"><div class="t">Đã nhập</div><div class="n">${done}</div></div><div class="card"><div class="t">Delay</div><div class="n" style="color:#b42318">${late}</div></div><div class="card"><div class="t">OK/Early</div><div class="n" style="color:#067647">${early}</div></div>`}
-function exportRows(){saveRows();const d=getData();return CHECKLIST.map(i=>{const r=d.rows[i.stt]||{};const p=planned(i.offsetBeforeETD);return {STT:i.stt,PlannedTime:p,ActualTime:r.actual||'',Task:i.task,PIC:i.pic,DelayYN:delayYN(r.actual,p),DelayMinutes:diffText(r.actual,p),ReasonRemark:r.reason||''}})}
+function updateSummary(){
+
+ const d=getData();
+
+ let done=0;
+ let late=0;
+ let early=0;
+
+ CHECKLIST.forEach(i=>{
+
+   const r=d.rows[i.stt]||{};
+
+   if(i.type==="single"){
+
+      if(r.actual){
+
+         done++;
+
+         if(
+           delayYN(
+             r.actual,
+             planned(i.offset)
+           )==="Yes"
+         ){
+            late++;
+         }else{
+            early++;
+         }
+      }
+
+   }else{
+
+      if(
+         r.startActual ||
+         r.endActual
+      ){
+
+         done++;
+
+         let hasDelay=false;
+
+         const p=plannedRange(
+           i.start,
+           i.end
+         );
+
+         if(
+           r.startActual &&
+           delayYN(
+             r.startActual,
+             p.start
+           )==="Yes"
+         ){
+           hasDelay=true;
+         }
+
+         if(
+           r.endActual &&
+           delayYN(
+             r.endActual,
+             p.end
+           )==="Yes"
+         ){
+           hasDelay=true;
+         }
+
+         if(hasDelay){
+            late++;
+         }else{
+            early++;
+         }
+      }
+
+   }
+
+ });
+
+ el('summary').innerHTML=`
+
+<div class="card">
+<div class="t">Tổng</div>
+<div class="n">${CHECKLIST.length}</div>
+</div>
+
+<div class="card">
+<div class="t">Đã nhập</div>
+<div class="n">${done}</div>
+</div>
+
+<div class="card">
+<div class="t">Delay</div>
+<div class="n" style="color:#b42318">
+${late}
+</div>
+</div>
+
+<div class="card">
+<div class="t">OK/Early</div>
+<div class="n" style="color:#067647">
+${early}
+</div>
+</div>
+
+`;
+
+}
+function exportRows(){
+
+ saveRows();
+
+ const d=getData();
+
+ return CHECKLIST.map(i=>{
+
+   const r=d.rows[i.stt]||{};
+
+   if(i.type==="single"){
+
+      const p=planned(i.offset);
+
+      return {
+
+        STT:i.stt,
+
+        Task:i.task,
+
+        PlanStart:p,
+        PlanEnd:'',
+
+        ActualStart:r.actual||'',
+        ActualEnd:'',
+
+        DelayStart:
+          diffText(r.actual,p),
+
+        DelayEnd:'',
+
+        PIC:i.pic,
+
+        Remark:r.reason||''
+      };
+   }
+
+   const p=plannedRange(
+      i.start,
+      i.end
+   );
+
+   return {
+
+      STT:i.stt,
+
+      Task:i.task,
+
+      PlanStart:p.start,
+      PlanEnd:p.end,
+
+      ActualStart:
+        r.startActual||'',
+
+      ActualEnd:
+        r.endActual||'',
+
+      DelayStart:
+        diffText(
+         r.startActual,
+         p.start
+        ),
+
+      DelayEnd:
+        diffText(
+         r.endActual,
+         p.end
+        ),
+
+      PIC:i.pic,
+
+      Remark:r.reason||''
+   };
+
+ });
+
+}
 function xmlEsc(v){return String(v==null?'':v).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;')}
-function downloadExcel(){const rows=exportRows();const meta=[['Flight No.',el('flightNo').value],['Date',el('flightDate').value],['ETD',el('etd').value],['Aircraft / Reg.',el('aircraft').value],['Bay',el('bay').value],['Prepared by',el('preparedBy').value]];const headers=['STT','PlannedTime','ActualTime','Task','PIC','DelayYN','DelayMinutes','ReasonRemark'];let x=`<?xml version="1.0"?><Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"><Styles><Style ss:ID="h"><Font ss:Bold="1"/><Interior ss:Color="#D9EAF7" ss:Pattern="Solid"/><Alignment ss:WrapText="1"/></Style><Style ss:ID="wrap"><Alignment ss:WrapText="1" Vertical="Top"/></Style></Styles><Worksheet ss:Name="Checklist"><Table><Column ss:Width="45"/><Column ss:Width="85"/><Column ss:Width="85"/><Column ss:Width="230"/><Column ss:Width="110"/><Column ss:Width="75"/><Column ss:Width="90"/><Column ss:Width="260"/>`;meta.forEach(m=>{x+=`<Row><Cell ss:StyleID="h"><Data ss:Type="String">${xmlEsc(m[0])}</Data></Cell><Cell><Data ss:Type="String">${xmlEsc(m[1])}</Data></Cell></Row>`});x+=`<Row></Row><Row>`;headers.forEach(h=>{x+=`<Cell ss:StyleID="h"><Data ss:Type="String">${xmlEsc(h)}</Data></Cell>`});x+=`</Row>`;rows.forEach(r=>{x+=`<Row>`;headers.forEach(h=>{x+=`<Cell ss:StyleID="wrap"><Data ss:Type="String">${xmlEsc(r[h])}</Data></Cell>`});x+=`</Row>`});x+=`</Table></Worksheet></Workbook>`;downloadBlob(x,'Checklist_'+el('flightNo').value.replaceAll('/','-')+'_'+el('flightDate').value+'.xls','application/vnd.ms-excel;charset=utf-8;')}
+function downloadExcel(){const rows=exportRows();const meta=[['Flight No.',el('flightNo').value],['Date',el('flightDate').value],['ETD',el('etd').value],['Aircraft / Reg.',el('aircraft').value],['Bay',el('bay').value],['Prepared by',el('preparedBy').value]];const headers=[
+
+'STT',
+
+'Task',
+
+'PlanStart',
+'PlanEnd',
+
+'ActualStart',
+'ActualEnd',
+
+'DelayStart',
+'DelayEnd',
+
+'PIC',
+
+'Remark'
+
+];let x=`<?xml version="1.0"?><Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"><Styles><Style ss:ID="h"><Font ss:Bold="1"/><Interior ss:Color="#D9EAF7" ss:Pattern="Solid"/><Alignment ss:WrapText="1"/></Style><Style ss:ID="wrap"><Alignment ss:WrapText="1" Vertical="Top"/></Style></Styles><Worksheet ss:Name="Checklist"><Table><Column ss:Width="45"/>
+
+<Column ss:Width="240"/>
+
+<Column ss:Width="85"/>
+<Column ss:Width="85"/>
+
+<Column ss:Width="85"/>
+<Column ss:Width="85"/>
+
+<Column ss:Width="85"/>
+<Column ss:Width="85"/>
+
+<Column ss:Width="120"/>
+
+<Column ss:Width="260"/>`;meta.forEach(m=>{x+=`<Row><Cell ss:StyleID="h"><Data ss:Type="String">${xmlEsc(m[0])}</Data></Cell><Cell><Data ss:Type="String">${xmlEsc(m[1])}</Data></Cell></Row>`});x+=`<Row></Row><Row>`;headers.forEach(h=>{x+=`<Cell ss:StyleID="h"><Data ss:Type="String">${xmlEsc(h)}</Data></Cell>`});x+=`</Row>`;rows.forEach(r=>{x+=`<Row>`;headers.forEach(h=>{x+=`<Cell ss:StyleID="wrap"><Data ss:Type="String">${xmlEsc(r[h])}</Data></Cell>`});x+=`</Row>`});x+=`</Table></Worksheet></Workbook>`;downloadBlob(x,'Checklist_'+el('flightNo').value.replaceAll('/','-')+'_'+el('flightDate').value+'.xls','application/vnd.ms-excel;charset=utf-8;')}
 function downloadBlob(content,filename,type){const blob=new Blob([content],{type:type});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;a.click();URL.revokeObjectURL(url)}
-function copyReport(){const rows=exportRows();let t='CHECKLIST TURNAROUND AIR INDIA\nFlight No.: '+el('flightNo').value+'\nDate: '+el('flightDate').value+'\nETD: '+el('etd').value+'\nAircraft: '+el('aircraft').value+'\nBay: '+el('bay').value+'\nPrepared by: '+el('preparedBy').value+'\n\n';rows.forEach(r=>{t+=r.STT+'. '+r.Task+' | Plan '+r.PlannedTime+' | Actual '+r.ActualTime+' | Delay '+r.DelayYN+' '+r.DelayMinutes+' | '+r.ReasonRemark+'\n'});navigator.clipboard.writeText(t).then(()=>alert('Đã copy báo cáo.'))}
-function buildPayload(){const rows=exportRows();return {recordKey:(el('flightDate').value+'_'+el('flightNo').value).replaceAll('/','-').replaceAll(' ','_'),savedAtLocal:new Date().toISOString(),flightNo:el('flightNo').value,flightDate:el('flightDate').value,etd:normalizeTimeValue(el('etd').value),aircraft:el('aircraft').value,bay:el('bay').value,preparedBy:el('preparedBy').value,totalTasks:CHECKLIST.length,completedTasks:rows.filter(r=>r.ActualTime).length,delayYes:rows.filter(r=>r.DelayYN==='Yes').length,rows:rows}}
-function submitToGoogleSheets(){if(!GOOGLE_SCRIPT_URL||GOOGLE_SCRIPT_URL.indexOf('PASTE_YOUR')>=0){alert('Chưa dán Web App URL của Google Apps Script vào index.html.');return}const payload=buildPayload();if(!payload.flightNo||!payload.flightDate){alert('Cần nhập Flight No. và Date.');return}el('sheetStatus').textContent='Đang gửi dữ liệu lên Google Sheets...';let iframe=el('gs_iframe');if(!iframe){iframe=document.createElement('iframe');iframe.name='gs_iframe';iframe.id='gs_iframe';iframe.style.display='none';document.body.appendChild(iframe)}const form=document.createElement('form');form.method='POST';form.action=GOOGLE_SCRIPT_URL;form.target='gs_iframe';form.style.display='none';const input=document.createElement('input');input.type='hidden';input.name='payload';input.value=JSON.stringify(payload);form.appendChild(input);document.body.appendChild(form);form.submit();setTimeout(()=>{document.body.removeChild(form);el('sheetStatus').textContent='Đã gửi yêu cầu. Mở Google Sheets kiểm tra tab SUMMARY và ngày bay.';alert('Đã gửi yêu cầu lên Google Sheets.')} ,900)}
+function copyReport(){
+
+ const rows=exportRows();
+
+ let t='CHECKLIST TURNAROUND AIR INDIA\\n';
+
+ t+='Flight No.: '+el('flightNo').value+'\\n';
+
+ t+='Date: '+el('flightDate').value+'\\n';
+
+ t+='ETD: '+el('etd').value+'\\n';
+
+ t+='Aircraft: '+el('aircraft').value+'\\n';
+
+ t+='Bay: '+el('bay').value+'\\n';
+
+ t+='Prepared by: '+el('preparedBy').value+'\\n\\n';
+
+ rows.forEach(r=>{
+
+   if(r.PlanEnd){
+
+      t+=
+      r.STT+'. '+r.Task+
+      ' | Plan '+r.PlanStart+
+      ' → '+r.PlanEnd+
+
+      ' | Actual '+
+      (r.ActualStart||'-')+
+      ' → '+
+      (r.ActualEnd||'-')+
+
+      ' | D.S '+
+      (r.DelayStart||'-')+
+
+      ' | D.E '+
+      (r.DelayEnd||'-')+
+
+      ' | '+(r.Remark||'')+
+
+      '\\n';
+
+   }else{
+
+      t+=
+      r.STT+'. '+r.Task+
+
+      ' | Plan '+r.PlanStart+
+
+      ' | Actual '+
+      (r.ActualStart||'-')+
+
+      ' | Diff '+
+      (r.DelayStart||'-')+
+
+      ' | '+(r.Remark||'')+
+
+      '\\n';
+   }
+
+ });
+
+ navigator.clipboard
+ .writeText(t)
+ .then(()=>alert('Đã copy báo cáo'));
+
+}
+function buildPayload(){
+
+ const rows=exportRows();
+
+ return {
+
+   recordKey:
+     (el('flightDate').value+'_'+
+      el('flightNo').value)
+      .replaceAll('/','-')
+      .replaceAll(' ','_'),
+
+   savedAtLocal:
+     new Date().toISOString(),
+
+   flightNo:
+     el('flightNo').value,
+
+   flightDate:
+     el('flightDate').value,
+
+   etd:
+     normalizeTimeValue(
+       el('etd').value
+     ),
+
+   aircraft:
+     el('aircraft').value,
+
+   bay:
+     el('bay').value,
+
+   preparedBy:
+     el('preparedBy').value,
+
+   totalTasks:
+     CHECKLIST.length,
+
+   completedTasks:
+     rows.filter(r =>
+       r.ActualStart ||
+       r.ActualEnd
+     ).length,
+
+   rows:rows
+
+ };
+
+}
+function submitToGoogleSheets(){if(!GOOGLE_SCRIPT_URL||GOOGLE_SCRIPT_URL.indexOf('https://script.google.com/macros/s/AKfycbxof5_Kb0sMaIYFTjRl232IHWymr84er1fzCeIXPtn3JYidnjFqBgRU2z4G8CImfS5YiA/exec')>=0){alert('Chưa dán Web App URL của Google Apps Script vào index.html.');return}const payload=buildPayload();if(!payload.flightNo||!payload.flightDate){alert('Cần nhập Flight No. và Date.');return}el('sheetStatus').textContent='Đang gửi dữ liệu lên Google Sheets...';let iframe=el('gs_iframe');if(!iframe){iframe=document.createElement('iframe');iframe.name='gs_iframe';iframe.id='gs_iframe';iframe.style.display='none';document.body.appendChild(iframe)}const form=document.createElement('form');form.method='POST';form.action=GOOGLE_SCRIPT_URL;form.target='gs_iframe';form.style.display='none';const input=document.createElement('input');input.type='hidden';input.name='payload';input.value=JSON.stringify(payload);form.appendChild(input);document.body.appendChild(form);form.submit();setTimeout(()=>{document.body.removeChild(form);el('sheetStatus').textContent='Đã gửi yêu cầu. Mở Google Sheets kiểm tra tab SUMMARY và ngày bay.';alert('Đã gửi yêu cầu lên Google Sheets.')} ,900)}
 ['flightNo','flightDate','etd','aircraft','bay','preparedBy'].forEach(id=>el(id).addEventListener('input',render));
 loadMeta();render();
 </script>
